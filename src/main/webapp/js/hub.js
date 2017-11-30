@@ -21,7 +21,7 @@ Chat = function(url){
         }
 
         if(event.code == 1006){
-            console.log("abnormal closeing websocket : reload page");
+            console.log("abnormal closing websocket : reload page");
             location.reload(true);
         }
     };
