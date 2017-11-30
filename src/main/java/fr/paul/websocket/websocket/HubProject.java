@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Paul
@@ -12,16 +14,22 @@ import java.io.IOException;
 @ServerEndpoint("/hub")
 public class HubProject{
 
-	private static final Logger LOG= Logger.getLogger("Chat");
+    static List<Session> sessions = new ArrayList<>();
+    private static final Logger LOG = Logger.getLogger("Chat");
+
     @OnMessage
     public void onMessage(String message, Session session){
-		LOG.info(message);
-		try {
-			session.getBasicRemote().sendText("ok");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        LOG.info(message);
+        try {
+            for (Session sess : sessions) {
+                if (!sess.getId().equals(session.getId())) {
+                    sess.getBasicRemote().sendText(message);
+                }
+            }
+
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     @OnError
@@ -31,11 +39,13 @@ public class HubProject{
 
     @OnOpen
     public void onOpen(Session session){
+        sessions.add(session);
 		LOG.info(session);
     }
 
     @OnClose
     public void onClose(CloseReason reason, Session session){
+        sessions.remove(session);
         LOG.info(reason);
     }
 

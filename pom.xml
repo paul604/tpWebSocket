@@ -34,12 +34,6 @@
 
     <dependencies>
         <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>3.8.1</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>javax.websocket</groupId>
             <artifactId>javax.websocket-api</artifactId>
             <version>1.1</version>
@@ -49,13 +43,9 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.3</version>
+            <scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-websocket</artifactId>
-			<version>8.5.23</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -66,12 +56,12 @@
     </dependencies>
 
     <build>
-      <finalName>${name}-${version}</finalName>
+      <finalName>${name}</finalName>
       <plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+				<version>3.2.0</version>
 				<configuration>
 					<!-- web.xml is not mandatory since JavaEE 5 -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
@@ -86,7 +76,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-		</plugins>
+      </plugins>
     </build>
 
 </project>

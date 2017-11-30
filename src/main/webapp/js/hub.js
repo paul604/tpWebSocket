@@ -16,8 +16,7 @@ Chat = function(url){
     };
 
     this.webSocket.onmessage = function(event) {
-        var data = JSON.parse(event.data);
-        console.log(data);
+        console.log(event.data);
     };
 
     this.webSocket.onclose = function(event) {
