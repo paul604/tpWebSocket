@@ -1,8 +1,16 @@
 Chat = function(url){
     this.url = url;
+    
+    if (this.webSocket !== undefined
+            && this.webSocket.readyState !== WebSocket.CLOSED) {
+        console.log("WebSocket is already opened.");
+    } else {
 
-    this.webSocket = new WebSocket(this.url);
-
+        this.webSocket = new WebSocket(this.url);
+    }
+    /**
+     * Binds functions to the listeners for the websocket.
+     */
     this.webSocket.onopen = function(event){
         console.log("web socket open at "+ this.url);
     };
