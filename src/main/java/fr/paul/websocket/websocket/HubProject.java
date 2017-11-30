@@ -1,7 +1,10 @@
 package fr.paul.websocket.websocket;
 
+import org.apache.log4j.Logger;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
 
 /**
  * @author Paul
@@ -23,7 +26,7 @@ public class HubProject{
 
     @OnError
     public void onError(Session session, Throwable throwable){
-		LOG.info(reason);
+        LOG.info(session);
     }
 
     @OnOpen
@@ -33,7 +36,7 @@ public class HubProject{
 
     @OnClose
     public void onClose(CloseReason reason, Session session){
-		LOG.info(session);
+        LOG.info(reason);
     }
 
 }
