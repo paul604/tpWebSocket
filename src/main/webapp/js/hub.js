@@ -33,4 +33,8 @@ Chat = function(url){
             location.reload(true);
         }
     };
+
+    this.send = function(message) {
+    	this.webSocket.send(message);
+    }
 }
